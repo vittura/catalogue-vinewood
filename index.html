@@ -238,7 +238,109 @@
 <footer><strong>Élite Vinewood</strong> &mdash; Catalogue Officiel &mdash; GTA RP</footer>
 
 <script>
-function imgUrl(model) { return `https://images.sky-systems.net/Vehicles/${model}.png`; }
+function imgUrl(model) { return `https://vittura.github.io/catalogue-vinewood/img/${model}.png`; };
+
+function imgUrl(model) {
+  // Primary: use Wikimedia GTA wiki thumbnails via Special:FilePath
+  const wikiNames = {
+    alpha:'Alpha-GTAV-front',banshee:'Banshee-GTAV-front',bestiagts:'BestiaGTS-GTAV-front',
+    blista2:'BlistaCompact-GTAV-front',buffalo:'Buffalo-GTAV-front',buffalo2:'BuffaloS-GTAV-front',
+    calico:'CalicoGTF-GTAO-front',carbonizzare:'Carbonizzare-GTAV-front',comet2:'Comet2-GTAV-front',
+    comet3:'CometRetroCustom-GTAO-front',comet4:'CometSafari-GTAO-front',comet5:'CometSR-GTAO-front',
+    comet6:'CometS2-GTAO-front',comet7:'CometS2Cabrio-GTAO-front',comet8:'Comet8-GTAO-front',
+    coquette:'Coquette-GTAV-front',coquette2:'CoquetteBlackFin-GTAO-front',coquette3:'CoquetteD10-GTAO-front',
+    coquette4:'CoquetteClassic-GTAO-front',cypher:'Cypher-GTAO-front',tampa3:'TampaDrift-GTAO-front',
+    elegy:'ElegyRH8-GTAV-front',elegy2:'ElegyRetroCustom-GTAO-front',euros:'Euros-GTAO-front',
+    feltzer2:'Feltzer-GTAV-front',flashgt:'FlashGT-GTAO-front',furoregt:'FuroreGT-GTAV-front',
+    fusilade:'Fusilade-GTAV-front',futo:'Futo-GTAV-front',futo2:'FutoGTX-GTAO-front',
+    gb200:'GB200-GTAO-front',growler:'Growler-GTAO-front',hotring:'HotringSabre-GTAO-front',
+    hellfire:'HotringHellfire-GTAO-front',imorgon:'Imorgon-GTAO-front',
+    italigto:'ItaliGTO-GTAO-front',italirsx:'ItaliRSX-GTAO-front',italigto2:'ItaliGTOStingerTT-GTAO-front',
+    issi4:'IssiSport-GTAO-front',jester:'Jester-GTAV-front',jester2:'JesterRacecar-GTAO-front',
+    jester3:'JesterClassic-GTAO-front',jester4:'JesterRR-GTAO-front',jugular:'Jugular-GTAO-front',
+    khamelion:'Khamelion-GTAV-front',komoda:'Komoda-GTAO-front',kuruma:'Kuruma-GTAO-front',
+    locust:'Locust-GTAO-front',lynx:'Lynx-GTAO-front',massacro:'Massacro-GTAV-front',
+    massacro2:'MassacroRacecar-GTAO-front',neo:'Neo-GTAO-front',neon:'Neon-GTAO-front',
+    omnis:'Omnis-GTAO-front',paragon:'ParagonR-GTAO-front',pariah:'Pariah-GTAO-front',
+    penumbra:'Penumbra-GTAV-front',penumbra2:'PenumbraFF-GTAO-front',raiden:'Raiden-GTAO-front',
+    rapidgt:'RapidGT-GTAV-front',raptor2:'Raptor-GTAO-front',remus:'Remus-GTAO-front',
+    rt3000:'RT3000-GTAO-front',ruston:'Ruston-GTAO-front',schafter4:'SchafterLWB-GTAO-front',
+    schafter5:'SchafterV12-GTAO-front',schlagen:'SchlagenGT-GTAO-front',schwarzer:'Schwartzer-GTAV-front',
+    sentinel3:'SentinelClassic-GTAO-front',seven70:'Seven70-GTAO-front',specter:'Specter-GTAO-front',
+    specter2:'SpecterCustom-GTAO-front',streiter:'Streiter-GTAO-front',sugoi:'Sugoi-GTAO-front',
+    sultan:'Sultan-GTAV-front',sultan2:'SultanClassic-GTAO-front',sultan3:'SultanRSClassic-GTAO-front',
+    tropos:'TroposRallye-GTAO-front',vectre:'Vectre-GTAO-front',verlierer:'Verlierer-GTAO-front',
+    vstr:'VSTR-GTAO-front',zr350:'ZR350-GTAO-front',thrax:'300R-GTAO-front',
+    corsita:'Corsita-GTAO-front',ninef:'9F-GTAV-front',ninef2:'9FCabrio-GTAV-front',
+    eightf:'8FDrafter-GTAO-front',surano:'Surano-GTAV-front',
+    // Muscle
+    dukes2:'BeaterDukes-GTAO-front',blade:'Blade-GTAV-front',brigham:'Brigham-GTAO-front',
+    broadway:'Broadway-GTAO-front',buccaneer:'Buccaneer-GTAV-front',buccaneer2:'BuccaneerCustom-GTAO-front',
+    chino:'Chino-GTAO-front',chino2:'ChinoCustom-GTAO-front',clique:'Clique-GTAO-front',
+    clique2:'CliqueBreak-GTAO-front',deviant:'Deviant-GTAO-front',dominator:'Dominator-GTAV-front',
+    dominator3:'DominatorGTX-GTAO-front',dominator8:'DominatorGT-GTAO-front',eudora:'Eudora-GTAO-front',
+    faction:'Faction-GTAV-front',faction2:'FactionCustom-GTAO-front',faction3:'FactionCustomDonk-GTAO-front',
+    ellie:'Ellie-GTAO-front',gauntlet:'Gauntlet-GTAV-front',gauntlet2:'GauntletClassic-GTAO-front',
+    gauntlet3:'GauntletClassicCustom-GTAO-front',gauntlet4:'GauntletHellfire-GTAO-front',
+    greenwood:'Greenwood-GTAO-front',hermes:'Hermes-GTAO-front',hotknife:'Hotknife-GTAV-front',
+    hustler:'Hustler-GTAO-front',impaler:'Impaler-GTAO-front',impaler2:'ImpalerSZ-GTAO-front',
+    impaler3:'ImpalerLX-GTAO-front',manana2:'MananaCustom-GTAO-front',moonbeam:'Moonbeam-GTAV-front',
+    moonbeam2:'MoonbeamCustom-GTAO-front',nightshade:'Nightshade-GTAO-front',peyote2:'PeyoteGasser-GTAO-front',
+    phoenix:'Phoenix-GTAV-front',picador:'Picador-GTAV-front',ratloader:'RatLoader-GTAV-front',
+    ratloader2:'RatTruck-GTAO-front',ruiner:'Ruiner-GTAV-front',ruiner4:'RuinerZZ8-GTAO-front',
+    sabre2:'SabreTurbo-GTAO-front',sabre3:'SabreTurboCustom-GTAO-front',slamvan:'Slamvan-GTAV-front',
+    slamvan2:'SlamvanCustom-GTAO-front',stallion:'Stallion-GTAV-front',tahoma:'TahomaCoupé-GTAO-front',
+    tampa:'Tampa-GTAV-front',tulip:'Tulip-GTAO-front',tulip2:'TulipM100-GTAO-front',
+    vamos:'Vamos-GTAO-front',vigero:'Vigero-GTAV-front',vigero2:'VigeroZX-GTAO-front',
+    vigero3:'VigeroZXConvertible-GTAO-front',virgo:'Virgo-GTAO-front',virgo2:'VirgoClassic-GTAO-front',
+    virgo3:'VirgoClassicCustom-GTAO-front',voodoo:'Voodoo-GTAV-front',voodoo2:'VoodooCustom-GTAO-front',
+    weevil2:'WeevilCustom-GTAO-front',yosemite:'Yosemite-GTAV-front',yosemite2:'YosemiteDrift-GTAO-front',
+    // Compacts
+    asbo:'Asbo-GTAO-front',blista:'Blista-GTAV-front',kanjo:'BlistaKanjo-GTAO-front',
+    brioso:'BriosoRA-GTAO-front',brioso2:'Brioso300-GTAO-front',brioso3:'Brioso300Widebody-GTAO-front',
+    club:'Club-GTAO-front',dilettante:'Dilettante-GTAV-front',issi:'Issi-GTAV-front',
+    issi2:'Issi2-GTAO-front',panto:'Panto-GTAV-front',prairie:'Prairie-GTAO-front',
+    rhapsody:'Rhapsody-GTAV-front',weevil:'Weevil-GTAO-front',
+    // Sedans
+    asea:'Asea-GTAV-front',asterope:'Asterope-GTAV-front',asterope2:'AsteropeGZ-GTAO-front',
+    cog55:'Cognoscenti55-GTAV-front',cognoscenti:'Cognoscenti-GTAV-front',emperor:'Emperor-GTAV-front',
+    emperor2:'Emperor2-GTAV-front',emperor3:'Emperor3-GTAV-front',fugitive:'Fugitive-GTAV-front',
+    glendale:'Glendale-GTAO-front',glendale2:'GlendaleCustom-GTAO-front',ingot:'Ingot-GTAV-front',
+    intruder:'Intruder-GTAV-front',premier:'Premier-GTAV-front',primo:'Primo-GTAV-front',
+    primo2:'PrimoCustom-GTAO-front',regina:'Regina-GTAV-front',rhinehart:'Rhinehart-GTAO-front',
+    schafter:'Schafter-GTAV-front',sherman:'Sherman-GTAO-front',stafford:'Stafford-GTAO-front',
+    stanier:'Stanier-GTAV-front',stratum:'Stratum-GTAV-front',stretch:'Stretch-GTAV-front',
+    superd:'SuperDiamond-GTAV-front',surge:'Surge-GTAV-front',tailgater:'Tailgater-GTAV-front',
+    tailgater2:'TailgaterS-GTAO-front',warrener:'Warrener-GTAV-front',warrener2:'WarrenerHKR-GTAO-front',
+    washington:'Washington-GTAV-front',
+    // Sport Classique
+    z190:'190z-GTAO-front',casco:'Casco-GTAO-front',cheburek:'Cheburek-GTAO-front',
+    cheetahclassic:'CheetahClassic-GTAO-front',dynasty:'Dynasty-GTAO-front',fagaloa:'Fagaloa-GTAO-front',
+    frankenstange:'FrankenStange-GTAO-front',gt500:'GT500-GTAO-front',everon:'HotringEveron-GTAO-front',
+    jb7002:'JB700W-GTAO-front',mamba:'Mamba-GTAO-front',manana:'Manana-GTAV-front',
+    michelli:'MichelliGT-GTAO-front',monroe:'Monroe-GTAO-front',nebula:'NebulaTurbo-GTAO-front',
+    panthere:'Panthere-GTAO-front',peyote:'Peyote-GTAV-front',peyote3:'PeyoteCustom-GTAO-front',
+    pigalle:'Pigalle-GTAV-front',rapidgt3:'RapidGTClassic-GTAO-front',retinue:'Retinue-GTAO-front',
+    revolter:'Revolter-GTAO-front',roosevelt:'Roosevelt-GTAO-front',roosevelt2:'RooseveltValor-GTAO-front',
+    savestra:'Savestra-GTAO-front',sm722:'SM722-GTAO-front',stinger:'Stinger-GTAV-front',
+    stingergt:'StingerGT-GTAV-front',stirlinggt:'StirlingGT-GTAO-front',swinger:'Swinger-GTAO-front',
+    tornado:'Tornado-GTAV-front',tornado2:'Tornado2-GTAV-front',tornado3:'Tornado3-GTAV-front',
+    tornado4:'Tornado4-GTAV-front',tornado5:'TornadoRatRod-GTAO-front',turismor:'TurismoClassic-GTAO-front',
+    ztype:'ZType-GTAO-front',zionclassic:'ZionClassic-GTAO-front',
+    // Vans
+    bison:'Bison-GTAV-front',bobcatxl:'BobcatXL-GTAV-front',burrito:'Burrito-GTAV-front',
+    burrito2:'Burrito2-GTAV-front',burrito3:'GangBurrito-GTAO-front',burrito4:'GangBurrito2-GTAO-front',
+    camper:'Camper-GTAV-front',clown:'ClownVan-GTAO-front',journey:'Journey-GTAV-front',
+    journey2:'JourneyII-GTAO-front',minivan:'Minivan-GTAV-front',minivan2:'MinivanCustom-GTAO-front',
+    paradise:'Paradise-GTAO-front',pony:'Pony-GTAV-front',rumpo:'Rumpo-GTAV-front',
+    speedo:'Speedo-GTAV-front',surfer:'Surfer-GTAV-front',surfer2:'Surfer2-GTAV-front',
+    surfer3:'SurferCustom-GTAO-front',youga:'Youga-GTAV-front',youga2:'YougaClassic-GTAO-front',
+    youga3:'YougaClassic4x4-GTAO-front',
+  };
+  const wikiName = wikiNames[model];
+  if (wikiName) return `https://gta.fandom.com/wiki/Special:FilePath/${wikiName}.png`;
+  return '';
+}
 
 const DATA = {
   sport: {
