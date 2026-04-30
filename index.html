@@ -30,7 +30,7 @@
   }
 
   /* ── HEADER ── */
-  header { position:relative; z-index:10; padding:0 48px; border-bottom:1px solid #1f1e1a; }
+  header { position:relative; z-index:20; padding:0 48px; border-bottom:1px solid #1f1e1a; overflow:visible; }
   .header-inner { max-width:1300px; margin:0 auto; padding:36px 0 0; }
   .header-top { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom:28px; flex-wrap:wrap; }
   .branding { display:flex; flex-direction:column; gap:6px; }
@@ -80,7 +80,7 @@
   .tab-btn.active .tab-count { background:rgba(201,168,76,0.2); color:var(--gold); }
 
   /* ── CONTROLS ── */
-  .controls-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:14px 48px; position:sticky; top:0; z-index:9; }
+  .controls-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:14px 48px; position:sticky; top:0; z-index:9; overflow:visible; }
   .controls-inner { max-width:1300px; margin:0 auto; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
   .search-wrap { position:relative; flex:1; min-width:200px; max-width:360px; }
   .search-wrap svg { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
@@ -152,6 +152,41 @@
   footer { position:relative; z-index:1; text-align:center; padding:22px; border-top:1px solid var(--border); font-size:11px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
   footer strong { color:var(--gold-dim); }
 
+
+  /* ── DROPDOWN ── */
+  .cat-dropdown-wrap { position:relative; padding: 10px 0; }
+  .cat-dropdown-btn {
+    display:flex; align-items:center; gap:12px;
+    background:transparent; border:1px solid var(--gold-dim);
+    color:var(--gold); font-family:'Rajdhani',sans-serif;
+    font-size:14px; font-weight:700; letter-spacing:2px;
+    padding:10px 20px; border-radius:4px; cursor:pointer;
+    text-transform:uppercase; transition:all 0.2s;
+    min-width:220px;
+  }
+  .cat-dropdown-btn:hover { background:rgba(201,168,76,0.08); border-color:var(--gold); }
+  .cat-arrow { font-size:10px; transition:transform 0.2s; }
+  .cat-arrow.open { transform:rotate(180deg); }
+  .cat-dropdown-menu {
+    display:none; position:absolute; top:calc(100% + 4px); left:0;
+    background:#0f1014; border:1px solid var(--gold-dim);
+    border-radius:6px; min-width:260px; z-index:9999;
+    box-shadow:0 12px 40px rgba(0,0,0,0.7);
+    overflow:hidden;
+  }
+  .cat-dropdown-menu.open { display:block !important; }
+  .cat-option {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px; color:var(--muted);
+    font-family:'Rajdhani',sans-serif; font-size:13px;
+    font-weight:600; letter-spacing:1.5px; cursor:pointer;
+    text-transform:uppercase; transition:all 0.15s;
+    border-bottom:1px solid var(--border);
+  }
+  .cat-option:last-child { border-bottom:none; }
+  .cat-option:hover { background:rgba(201,168,76,0.07); color:var(--gold); }
+  .cat-option.active { background:rgba(201,168,76,0.12); color:var(--gold); border-left:2px solid var(--gold); }
+
   @media(max-width:768px) {
     header,.controls-bar,main { padding-left:16px; padding-right:16px; }
     .brand-name { font-size:30px; }
@@ -167,7 +202,7 @@
   <div class="header-inner">
     <div class="header-top">
       <div class="branding">
-        <div class="brand-eyebrow">Los Santos — GTA RP</div>
+        <div class="brand-eyebrow">Meta RP — GTA RP</div>
         <div class="brand-name"><em>Élite</em> Vinewood</div>
         <div class="brand-sub">Concessionnaire Automobile de Prestige</div>
       </div>
@@ -178,12 +213,24 @@
     </div>
     <div class="gold-line"></div>
     <div class="tabs-bar" id="tabsBar">
-      <button class="tab-btn active" onclick="setCategory('sport',this)">🏎️ Sport <span class="tab-count">88</span></button>
-      <button class="tab-btn" onclick="setCategory('muscle',this)">💪 Muscle <span class="tab-count">63</span></button>
-      <button class="tab-btn" onclick="setCategory('compacts',this)">🚙 Compacts <span class="tab-count">14</span></button>
-      <button class="tab-btn" onclick="setCategory('sedans',this)">🚗 Sedans <span class="tab-count">30</span></button>
-      <button class="tab-btn" onclick="setCategory('classique',this)">🏛️ Sport Classique <span class="tab-count">38</span></button>
-      <button class="tab-btn" onclick="setCategory('vans',this)">🚐 Vans <span class="tab-count">22</span></button>
+      <div class="cat-dropdown-wrap">
+        <button class="cat-dropdown-btn" onclick="toggleDropdown()">
+          <span id="catDropdownLabel">Catégorie</span>
+          <span class="cat-arrow" id="catArrow">▼</span>
+        </button>
+        <div class="cat-dropdown-menu" id="catDropdownMenu">
+          <div class="cat-option active" onclick="selectCat('sport','🏎️ Sport',this)">🏎️ Sport <span class="tab-count">88</span></div>
+          <div class="cat-option" onclick="selectCat('muscle','💪 Muscle',this)">💪 Muscle <span class="tab-count">63</span></div>
+          <div class="cat-option" onclick="selectCat('compacts','🚙 Compacts',this)">🚙 Compacts <span class="tab-count">14</span></div>
+          <div class="cat-option" onclick="selectCat('sedans','🚗 Sedans',this)">🚗 Sedans <span class="tab-count">30</span></div>
+          <div class="cat-option" onclick="selectCat('classique','🏛️ Sport Classique',this)">🏛️ Sport Classique <span class="tab-count">38</span></div>
+          <div class="cat-option" onclick="selectCat('vans','🚐 Vans',this)">🚐 Vans <span class="tab-count">22</span></div>
+          <div class="cat-option" onclick="selectCat('coupes','🚘 Coupés',this)">🚘 Coupés <span class="tab-count">16</span></div>
+          <div class="cat-option" onclick="selectCat('super','⚡ Super',this)">⚡ Super <span class="tab-count">53</span></div>
+          <div class="cat-option" onclick="selectCat('offroad','🏔️ Off Road',this)">🏔️ Off Road <span class="tab-count">31</span></div>
+          <div class="cat-option" onclick="selectCat('suv','🚙 SUV',this)">🚙 SUV <span class="tab-count">35</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -221,14 +268,14 @@
   <div class="modal">
     <div class="modal-img-wrap"><img id="modalImg" src="" alt=""></div>
     <div class="modal-body">
-      <div class="modal-eyebrow">Élite Vinewood — Los Santos</div>
+      <div class="modal-eyebrow">Élite Vinewood — Meta RP</div>
       <div class="modal-cat" id="modalCat">Sport</div>
       <div class="modal-title" id="modalTitle"></div>
       <div class="modal-price" id="modalPrice"></div>
       <div class="modal-divider"></div>
       <div class="modal-note">Pour acquérir ce véhicule, rendez-vous à la concession <strong style="color:var(--gold-dim)">Élite Vinewood</strong> in-game ou contactez un vendeur disponible sur le serveur.</div>
       <div class="modal-actions">
-        <button class="btn-primary">📞 Contacter un vendeur</button>
+        <a href="https://discord.gg/zAdUxjYHTF" target="_blank" style="flex:1;text-decoration:none;"><button class="btn-primary" style="width:100%">📞 Contacter un vendeur</button></a>
         <button class="btn-close" onclick="document.getElementById('modal').classList.remove('open')">Fermer</button>
       </div>
     </div>
@@ -627,6 +674,163 @@ const DATA = {
       { name:"Youga Classique",      price:800000,  model:"youga2" },
       { name:"Youga Classique 4x4",  price:1000000, model:"youga3" },
     ]
+  }  ,
+  coupes: {
+    label: "Coupés",
+    cars: [
+      { name:"Cognoscenti Cabrio", price:525000, model:"cogcabrio" },
+      { name:"Exemplar",           price:450000, model:"exemplar" },
+      { name:"F620",               price:400000, model:"f620" },
+      { name:"Felon",              price:350000, model:"felon" },
+      { name:"Felon GT",           price:400000, model:"felon2" },
+      { name:"FR36",               price:1600000,model:"fr36" },
+      { name:"Jackal",             price:375000, model:"jackal" },
+      { name:"Oracle",             price:300000, model:"oracle" },
+      { name:"Oracle XS",          price:325000, model:"oracle2" },
+      { name:"Previon",            price:200000, model:"previon" },
+      { name:"Sentinel",           price:350000, model:"sentinel" },
+      { name:"Sentinel XS",        price:375000, model:"sentinel2" },
+      { name:"Windsor",            price:975000, model:"windsor" },
+      { name:"Windsor Drop",       price:1100000,model:"windsor2" },
+      { name:"Zion",               price:350000, model:"zion" },
+      { name:"Zion Cabrio",        price:375000, model:"zion2" },
+    ]
+  }  ,
+  super: {
+    label: "Super",
+    cars: [
+      { name:"811",              price:1200000,  model:"pfister811" },
+      { name:"Adder",            price:5200000,  model:"adder" },
+      { name:"Autarch",          price:6000000,  model:"autarch" },
+      { name:"Banshee 900R",     price:1500000,  model:"banshee2" },
+      { name:"Bullet",           price:1400000,  model:"bullet" },
+      { name:"Cheetah",          price:1800000,  model:"cheetah" },
+      { name:"Cyclone",          price:1300000,  model:"cyclone" },
+      { name:"Deveste Eight",    price:6500000,  model:"deveste" },
+      { name:"Emerus",           price:2000000,  model:"emerus" },
+      { name:"Entity MT",        price:10500000, model:"entitymt" },
+      { name:"Entity XF",        price:1800000,  model:"entityxf" },
+      { name:"Entity XXR",       price:2200000,  model:"entityxxr" },
+      { name:"FMJ",              price:3000000,  model:"fmj" },
+      { name:"Furia",            price:2700000,  model:"furia" },
+      { name:"GP1",              price:3500000,  model:"gp1" },
+      { name:"Ignus",            price:3200000,  model:"ignus" },
+      { name:"Infernus",         price:2000000,  model:"infernus" },
+      { name:"Itali GTB",        price:2500000,  model:"italigt" },
+      { name:"Itali GTB Custom", price:2900000,  model:"italigtb2" },
+      { name:"Krieger",          price:2700000,  model:"krieger" },
+      { name:"LM87",             price:10000000, model:"lm87" },
+      { name:"Nero",             price:6000000,  model:"nero" },
+      { name:"Nero Custom",      price:6800000,  model:"nero2" },
+      { name:"Osiris",           price:5000000,  model:"osiris" },
+      { name:"Penetrator",       price:2500000,  model:"penetrator" },
+      { name:"RE-7B",            price:5000000,  model:"re7b" },
+      { name:"Reaper",           price:8000000,  model:"reaper" },
+      { name:"S80RR",            price:7000000,  model:"s80" },
+      { name:"SC1",              price:2500000,  model:"sc1" },
+      { name:"Sultan RS",        price:1500000,  model:"sultanrs" },
+      { name:"T20",              price:2500000,  model:"t20" },
+      { name:"Taipan",           price:3000000,  model:"taipan" },
+      { name:"Tempesta",         price:4000000,  model:"tempesta" },
+      { name:"Tezeract",         price:6000000,  model:"tezeract" },
+      { name:"Thrax",            price:9000000,  model:"thrax2" },
+      { name:"Tigon",            price:6000000,  model:"tigon" },
+      { name:"Torero",           price:11000000, model:"torero" },
+      { name:"Torero XO",        price:4000000,  model:"toreador" },
+      { name:"Turismo Omaggio",  price:4000000,  model:"turismoii" },
+      { name:"Turismo R",        price:6500000,  model:"turismor" },
+      { name:"Tyrant",           price:8000000,  model:"tyrant" },
+      { name:"Tyrus",            price:9000000,  model:"tyrus" },
+      { name:"Vacca",            price:5000000,  model:"vacca" },
+      { name:"Vagner",           price:8500000,  model:"vagner" },
+      { name:"Visione",          price:9500000,  model:"visione" },
+      { name:"Voltic",           price:1500000,  model:"voltic" },
+      { name:"XA-21",            price:6500000,  model:"xa21" },
+      { name:"X80 Proto",        price:12000000, model:"x80proto" },
+      { name:"Zeno",             price:10000000, model:"zeno" },
+      { name:"Zentorno",         price:6000000,  model:"zentorno" },
+      { name:"Zorrusso",         price:7500000,  model:"zorrusso" },
+      { name:"10F",              price:9500000,  model:"tenf" },
+      { name:"10F Large",        price:10500000, model:"tenf2" },
+    ]
+  }  ,
+  offroad: {
+    label: "Off Road",
+    cars: [
+      { name:"Bifta",           price:250000,  model:"bifta" },
+      { name:"Blazer",          price:200000,  model:"blazer" },
+      { name:"Blazer Street",   price:350000,  model:"blazer5" },
+      { name:"Bodhi",           price:200000,  model:"bodhi" },
+      { name:"Boor",            price:350000,  model:"boor" },
+      { name:"Brawler",         price:650000,  model:"brawler" },
+      { name:"4x4 Caracara",    price:850000,  model:"caracara" },
+      { name:"Draugur",         price:750000,  model:"draugur" },
+      { name:"Dubsta 6x6",      price:600000,  model:"dubsta3" },
+      { name:"Dune Buggy",      price:300000,  model:"dune" },
+      { name:"Duneloader",      price:325000,  model:"duneloader" },
+      { name:"Everon",          price:700000,  model:"everon2" },
+      { name:"Freecrawler",     price:300000,  model:"freecrawler" },
+      { name:"Hot Rod Blazer",  price:250000,  model:"blazer4" },
+      { name:"Injection",       price:325000,  model:"injection" },
+      { name:"Kalahari",        price:200000,  model:"kalahari" },
+      { name:"Kamacho",         price:650000,  model:"kamacho" },
+      { name:"MonstroCiti",     price:700000,  model:"monstrociti" },
+      { name:"Outlaw",          price:850000,  model:"outlaw" },
+      { name:"Rancher XL",      price:325000,  model:"rancherxl" },
+      { name:"Ratel",           price:1500000, model:"ratel" },
+      { name:"Rebel",           price:350000,  model:"rebel" },
+      { name:"Rebel Rouillé",   price:250000,  model:"rebel2" },
+      { name:"Riata",           price:375000,  model:"riata" },
+      { name:"Sandking SWB",    price:375000,  model:"sandking" },
+      { name:"Sandking XL",     price:400000,  model:"sandking2" },
+      { name:"Terminus",        price:2000000, model:"terminus" },
+      { name:"Vagrant",         price:675000,  model:"vagrant" },
+      { name:"Verus",           price:200000,  model:"verus" },
+      { name:"Walton L35",      price:400000,  model:"waltonl35" },
+      { name:"Yosemite Rancher",price:400000,  model:"yosemite3" },
+    ]
+  }  ,
+  suv: {
+    label: "SUV",
+    cars: [
+      { name:"Aleutian",          price:1800000, model:"aleutian" },
+      { name:"Astron",            price:1600000, model:"astron" },
+      { name:"Baller",            price:700000,  model:"baller" },
+      { name:"Baller (Sport)",    price:700000,  model:"baller2" },
+      { name:"Baller LE",         price:750000,  model:"baller3" },
+      { name:"Baller LE LWB",     price:800000,  model:"baller4" },
+      { name:"Baller ST",         price:1700000, model:"baller5" },
+      { name:"BeeJay XL",         price:600000,  model:"bjxl" },
+      { name:"Cavalcade",         price:700000,  model:"cavalcade" },
+      { name:"Cavalcade (Sport)", price:750000,  model:"cavalcade2" },
+      { name:"Cavalcade XL",      price:1600000, model:"cavalcade3" },
+      { name:"Contender",         price:1500000, model:"contender" },
+      { name:"Dorado",            price:700000,  model:"dorado" },
+      { name:"Dubsta",            price:1200000, model:"dubsta" },
+      { name:"Dubsta (Custom)",   price:1300000, model:"dubsta2" },
+      { name:"FQ 2",              price:500000,  model:"fq2" },
+      { name:"Granger",           price:1000000, model:"granger" },
+      { name:"Gresley",           price:650000,  model:"gresley" },
+      { name:"Habanero",          price:450000,  model:"habanero" },
+      { name:"Huntley S",         price:800000,  model:"huntley" },
+      { name:"I-Wagen",           price:1300000, model:"iwagen" },
+      { name:"Issi Rallye",       price:1300000, model:"issi5" },
+      { name:"Landstalker",       price:700000,  model:"landstalker" },
+      { name:"Landstalker XL",    price:750000,  model:"landstalker2" },
+      { name:"Mesa",              price:500000,  model:"mesa" },
+      { name:"Novak",             price:1200000, model:"novak" },
+      { name:"Patriot",           price:900000,  model:"patriot" },
+      { name:"Patriot Stretch",   price:5000000, model:"patriot2" },
+      { name:"Radius",            price:500000,  model:"radius" },
+      { name:"Rebla GTS",         price:1400000, model:"rebla" },
+      { name:"Rocoto",            price:750000,  model:"rocoto" },
+      { name:"Seminole",          price:600000,  model:"seminole" },
+      { name:"Seminole Frontier", price:800000,  model:"seminole2" },
+      { name:"Serrano",           price:750000,  model:"serrano" },
+      { name:"Toros",             price:1700000, model:"toros" },
+      { name:"Vivanite",          price:900000,  model:"vivanite" },
+      { name:"XLS",               price:1200000, model:"xls" },
+    ]
   }
 };
 
@@ -666,6 +870,14 @@ function updateFilters(cat) {
     fl.textContent = '— 700K$'; fm.textContent = '700K — 1.2M$'; fh.textContent = '+ 1.2M$';
   } else if (cat === 'vans') {
     fl.textContent = '— 600K$'; fm.textContent = '600K — 900K$'; fh.textContent = '+ 900K$';
+  } else if (cat === 'coupes') {
+    fl.textContent = '— 400K$'; fm.textContent = '400K — 800K$'; fh.textContent = '+ 800K$';
+  } else if (cat === 'super') {
+    fl.textContent = '— 3M$'; fm.textContent = '3M — 6M$'; fh.textContent = '+ 6M$';
+  } else if (cat === 'offroad') {
+    fl.textContent = '— 350K$'; fm.textContent = '350K — 700K$'; fh.textContent = '+ 700K$';
+  } else if (cat === 'suv') {
+    fl.textContent = '— 750K$'; fm.textContent = '750K — 1.5M$'; fh.textContent = '+ 1.5M$';
   } else {
     fl.textContent = '— 1M$'; fm.textContent = '1M — 2M$'; fh.textContent = '+ 2M$';
   }
@@ -705,6 +917,22 @@ function filterCars() {
       if (currentFilter === 'low')  mF = c.price < 600000;
       if (currentFilter === 'mid')  mF = c.price >= 600000 && c.price <= 900000;
       if (currentFilter === 'high') mF = c.price > 900000;
+    } else if (currentCat === 'coupes') {
+      if (currentFilter === 'low')  mF = c.price < 400000;
+      if (currentFilter === 'mid')  mF = c.price >= 400000 && c.price <= 800000;
+      if (currentFilter === 'high') mF = c.price > 800000;
+    } else if (currentCat === 'super') {
+      if (currentFilter === 'low')  mF = c.price < 3000000;
+      if (currentFilter === 'mid')  mF = c.price >= 3000000 && c.price <= 6000000;
+      if (currentFilter === 'high') mF = c.price > 6000000;
+    } else if (currentCat === 'offroad') {
+      if (currentFilter === 'low')  mF = c.price < 350000;
+      if (currentFilter === 'mid')  mF = c.price >= 350000 && c.price <= 700000;
+      if (currentFilter === 'high') mF = c.price > 700000;
+    } else if (currentCat === 'suv') {
+      if (currentFilter === 'low')  mF = c.price < 750000;
+      if (currentFilter === 'mid')  mF = c.price >= 750000 && c.price <= 1500000;
+      if (currentFilter === 'high') mF = c.price > 1500000;
     } else {
       if (currentFilter === 'low')  mF = c.price < 1000000;
       if (currentFilter === 'mid')  mF = c.price >= 1000000 && c.price <= 2000000;
@@ -773,6 +1001,40 @@ function closeModalBg(e) {
 document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modal').classList.remove('open'); });
 
 filterCars();
+
+function toggleDropdown() {
+  const menu = document.getElementById('catDropdownMenu');
+  const arrow = document.getElementById('catArrow');
+  menu.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function selectCat(cat, label, el) {
+  document.getElementById('catDropdownLabel').textContent = 'Catégorie';
+  document.getElementById('catDropdownMenu').classList.remove('open');
+  document.getElementById('catArrow').classList.remove('open');
+  document.querySelectorAll('.cat-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  // Reuse existing setCategory logic
+  currentCat = cat;
+  currentFilter = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('categoryLabel').textContent = 'Catégorie — ' + DATA[cat].label;
+  updateFilters(cat);
+  filterCars();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const wrap = document.querySelector('.cat-dropdown-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('catDropdownMenu').classList.remove('open');
+    document.getElementById('catArrow').classList.remove('open');
+  }
+});
+
 </script>
 </body>
 </html>
