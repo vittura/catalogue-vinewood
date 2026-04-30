@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Élite Vinewood — Catalogue Officiel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07080a;
+    --surface: #0c0d10;
+    --card: #0f1014;
+    --card-hover: #14151a;
+    --border: #1f1e1a;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-dim: #8a6f2e;
+    --text: #ede8df;
+    --muted: #5a5448;
+    --price-color: #c9a84c;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Rajdhani',sans-serif; min-height:100vh; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201,168,76,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 100% 100%, rgba(201,168,76,0.03) 0%, transparent 60%);
+    pointer-events:none; z-index:0;
+  }
+
+  /* ── HEADER ── */
+  header { position:relative; z-index:20; padding:0 48px; border-bottom:1px solid #1f1e1a; overflow:visible; }
+  .header-inner { max-width:1300px; margin:0 auto; padding:36px 0 0; }
+  .header-top { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom:28px; flex-wrap:wrap; }
+  .branding { display:flex; flex-direction:column; gap:6px; }
+  .brand-eyebrow { font-size:10px; font-weight:700; letter-spacing:6px; color:var(--gold-dim); text-transform:uppercase; }
+  .brand-name { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:var(--gold); letter-spacing:3px; line-height:1; text-shadow:0 0 40px rgba(201,168,76,0.2); }
+  .brand-name em { font-style:normal; color:var(--text); }
+  .brand-sub { font-size:11px; font-weight:500; letter-spacing:4px; color:var(--muted); text-transform:uppercase; margin-top:4px; }
+  .header-right { display:flex; flex-direction:column; align-items:flex-end; gap:10px; }
+  .pill { display:inline-flex; align-items:center; gap:8px; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.25); color:var(--gold); font-size:12px; font-weight:700; letter-spacing:2px; padding:7px 16px; border-radius:3px; text-transform:uppercase; }
+  .pill::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+  .server-info { font-size:11px; color:var(--muted); letter-spacing:1px; }
+  .gold-line { width:100%; height:1px; background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent); margin:20px 0 0; opacity:0.5; }
+
+  /* ── TABS ── */
+  .tabs-bar { display:flex; gap:0; overflow-x:auto; scrollbar-width:none; }
+  .tabs-bar::-webkit-scrollbar { display:none; }
+  .tab-btn {
+    background:transparent;
+    border:none;
+    border-bottom:2px solid transparent;
+    color:var(--muted);
+    font-family:'Rajdhani',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    padding:16px 22px 14px;
+    cursor:pointer;
+    text-transform:uppercase;
+    transition:all 0.2s;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .tab-btn:hover { color:var(--gold); }
+  .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+  .tab-count {
+    background:rgba(201,168,76,0.12);
+    color:var(--gold-dim);
+    font-size:10px;
+    font-weight:700;
+    padding:2px 7px;
+    border-radius:10px;
+    letter-spacing:1px;
+  }
+  .tab-btn.active .tab-count { background:rgba(201,168,76,0.2); color:var(--gold); }
+
+  /* ── CONTROLS ── */
+  .controls-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:14px 48px; position:sticky; top:0; z-index:9; overflow:visible; }
+  .controls-inner { max-width:1300px; margin:0 auto; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .search-wrap { position:relative; flex:1; min-width:200px; max-width:360px; }
+  .search-wrap svg { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
+  input[type="text"] { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:'Rajdhani',sans-serif; font-size:14px; font-weight:500; letter-spacing:1px; padding:10px 14px 10px 38px; border-radius:4px; outline:none; transition:border-color 0.25s,box-shadow 0.25s; }
+  input[type="text"]:focus { border-color:var(--gold-dim); box-shadow:0 0 0 3px rgba(201,168,76,0.07); }
+  input[type="text"]::placeholder { color:var(--muted); }
+  .sort-select { background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:'Rajdhani',sans-serif; font-size:13px; font-weight:600; letter-spacing:1px; padding:10px 14px; border-radius:4px; outline:none; cursor:pointer; text-transform:uppercase; }
+  .filter-btns { display:flex; gap:6px; flex-wrap:wrap; }
+  .filter-btn { background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; padding:8px 12px; border-radius:4px; cursor:pointer; transition:all 0.2s; text-transform:uppercase; }
+  .filter-btn:hover { border-color:var(--gold-dim); color:var(--gold); }
+  .filter-btn.active { background:rgba(201,168,76,0.1); border-color:var(--gold); color:var(--gold); }
+
+  /* ── MAIN ── */
+  main { position:relative; z-index:1; max-width:1300px; margin:0 auto; padding:32px 48px 80px; }
+  .results-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:8px; }
+  .results-info { font-size:11px; font-weight:600; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+  .results-info strong { color:var(--gold); font-weight:700; }
+  .category-label { font-family:'Cormorant Garamond',serif; font-size:13px; font-weight:600; letter-spacing:3px; color:var(--gold-dim); text-transform:uppercase; }
+
+  /* ── GRID ── */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+
+  /* ── CARD ── */
+  .card { background:var(--card); border:1px solid var(--border); border-radius:6px; overflow:hidden; transition:transform 0.25s ease,border-color 0.25s,box-shadow 0.25s; cursor:pointer; animation:fadeIn 0.35s ease both; }
+  .card:hover { transform:translateY(-3px); border-color:var(--gold-dim); box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(201,168,76,0.1); background:var(--card-hover); }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  .card-img { width:100%; height:165px; background:#09090c; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
+  .card-img::after { content:''; position:absolute; bottom:0;left:0;right:0; height:50px; background:linear-gradient(transparent,rgba(9,9,12,0.85)); pointer-events:none; z-index:1; }
+  .card-img img { width:100%; height:100%; object-fit:contain; padding:8px; transition:transform 0.4s ease; display:block; }
+  .card:hover .card-img img { transform:scale(1.06); }
+  .img-placeholder { display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--muted); font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.35; }
+
+  .card-body { padding:12px 15px 15px; display:flex; flex-direction:column; gap:9px; }
+  .card-header { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+  .car-name { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; color:var(--text); line-height:1.1; }
+  .card:hover .car-name { color:var(--gold-light); }
+  .price-tag { font-family:'Orbitron',monospace; font-size:11px; font-weight:700; color:var(--price-color); white-space:nowrap; margin-top:3px; }
+  .card-footer { display:flex; align-items:center; justify-content:space-between; padding-top:9px; border-top:1px solid var(--border); }
+  .cat-badge { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+  .buy-btn { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); color:var(--gold); font-family:'Rajdhani',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; padding:4px 11px; border-radius:3px; cursor:pointer; text-transform:uppercase; transition:all 0.2s; }
+  .buy-btn:hover { background:rgba(201,168,76,0.2); border-color:var(--gold); }
+
+  .empty-state { grid-column:1/-1; text-align:center; padding:80px 20px; }
+  .empty-state p { font-family:'Cormorant Garamond',serif; font-size:22px; margin-bottom:8px; color:var(--gold-dim); }
+  .empty-state span { font-size:13px; color:var(--muted); }
+
+  /* ── MODAL ── */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity 0.3s; backdrop-filter:blur(6px); }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal { background:#0f1014; border:1px solid var(--gold-dim); border-radius:8px; max-width:540px; width:100%; overflow:hidden; transform:scale(0.95) translateY(10px); transition:transform 0.3s ease; box-shadow:0 24px 80px rgba(0,0,0,0.8); }
+  .modal-overlay.open .modal { transform:scale(1) translateY(0); }
+  .modal-img-wrap { width:100%; height:220px; background:#09090c; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
+  .modal-img-wrap::after { content:''; position:absolute; bottom:0;left:0;right:0; height:70px; background:linear-gradient(transparent,#0f1014); }
+  .modal-img-wrap img { width:100%; height:100%; object-fit:contain; padding:16px; }
+  .modal-body { padding:20px 26px 26px; }
+  .modal-eyebrow { font-size:10px; font-weight:700; letter-spacing:4px; color:var(--gold-dim); text-transform:uppercase; margin-bottom:5px; }
+  .modal-cat { display:inline-block; font-size:10px; font-weight:700; letter-spacing:2px; color:var(--gold); background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2); padding:3px 10px; border-radius:3px; text-transform:uppercase; margin-bottom:8px; }
+  .modal-title { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:700; color:var(--gold-light); margin-bottom:4px; letter-spacing:1px; }
+  .modal-price { font-family:'Orbitron',monospace; font-size:18px; font-weight:700; color:var(--price-color); margin-bottom:18px; }
+  .modal-divider { width:100%; height:1px; background:linear-gradient(90deg,var(--gold-dim),transparent); margin-bottom:16px; opacity:0.4; }
+  .modal-note { font-size:13px; color:var(--muted); letter-spacing:0.5px; line-height:1.7; margin-bottom:20px; }
+  .modal-actions { display:flex; gap:10px; }
+  .btn-primary { flex:1; background:linear-gradient(135deg,var(--gold-dim),var(--gold)); border:none; color:#07080a; font-family:'Rajdhani',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; padding:11px 20px; border-radius:4px; cursor:pointer; text-transform:uppercase; transition:opacity 0.2s; }
+  .btn-primary:hover { opacity:0.85; }
+  .btn-close { background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Rajdhani',sans-serif; font-size:13px; font-weight:600; letter-spacing:2px; padding:11px 16px; border-radius:4px; cursor:pointer; text-transform:uppercase; transition:all 0.2s; }
+  .btn-close:hover { border-color:var(--muted); color:var(--text); }
+
+  footer { position:relative; z-index:1; text-align:center; padding:22px; border-top:1px solid var(--border); font-size:11px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+  footer strong { color:var(--gold-dim); }
+
+
+  /* ── DROPDOWN ── */
+  .cat-dropdown-wrap { position:relative; padding: 10px 0; }
+  .cat-dropdown-btn {
+    display:flex; align-items:center; gap:12px;
+    background:transparent; border:1px solid var(--gold-dim);
+    color:var(--gold); font-family:'Rajdhani',sans-serif;
+    font-size:14px; font-weight:700; letter-spacing:2px;
+    padding:10px 20px; border-radius:4px; cursor:pointer;
+    text-transform:uppercase; transition:all 0.2s;
+    min-width:220px;
+  }
+  .cat-dropdown-btn:hover { background:rgba(201,168,76,0.08); border-color:var(--gold); }
+  .cat-arrow { font-size:10px; transition:transform 0.2s; }
+  .cat-arrow.open { transform:rotate(180deg); }
+  .cat-dropdown-menu {
+    display:none; position:absolute; top:calc(100% + 4px); left:0;
+    background:#0f1014; border:1px solid var(--gold-dim);
+    border-radius:6px; min-width:260px; z-index:9999;
+    box-shadow:0 12px 40px rgba(0,0,0,0.7);
+    overflow:hidden;
+  }
+  .cat-dropdown-menu.open { display:block !important; }
+  .cat-option {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 18px; color:var(--muted);
+    font-family:'Rajdhani',sans-serif; font-size:13px;
+    font-weight:600; letter-spacing:1.5px; cursor:pointer;
+    text-transform:uppercase; transition:all 0.15s;
+    border-bottom:1px solid var(--border);
+  }
+  .cat-option:last-child { border-bottom:none; }
+  .cat-option:hover { background:rgba(201,168,76,0.07); color:var(--gold); }
+  .cat-option.active { background:rgba(201,168,76,0.12); color:var(--gold); border-left:2px solid var(--gold); }
+
+  @media(max-width:768px) {
+    header,.controls-bar,main { padding-left:16px; padding-right:16px; }
+    .brand-name { font-size:30px; }
+    .grid { grid-template-columns:1fr 1fr; gap:10px; }
+    .tab-btn { padding:14px 14px 12px; font-size:12px; }
+  }
+  @media(max-width:480px) { .grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="branding">
+        <div class="brand-eyebrow">Meta RP — GTA RP</div>
+        <div class="brand-name"><em>Élite</em> Vinewood</div>
+        <div class="brand-sub">Concessionnaire Automobile de Prestige</div>
+      </div>
+      <div class="header-right">
+        <div class="pill">Catalogue en ligne</div>
+        <div class="server-info">Contactez un vendeur in-game pour acquérir un véhicule</div>
+      </div>
+    </div>
+    <div class="gold-line"></div>
+    <div class="tabs-bar" id="tabsBar">
+      <div class="cat-dropdown-wrap">
+        <button class="cat-dropdown-btn" onclick="toggleDropdown()">
+          <span id="catDropdownLabel">Catégorie</span>
+          <span class="cat-arrow" id="catArrow">▼</span>
+        </button>
+        <div class="cat-dropdown-menu" id="catDropdownMenu">
+          <div class="cat-option active" onclick="selectCat('sport','🏎️ Sport',this)">🏎️ Sport <span class="tab-count">88</span></div>
+          <div class="cat-option" onclick="selectCat('muscle','💪 Muscle',this)">💪 Muscle <span class="tab-count">63</span></div>
+          <div class="cat-option" onclick="selectCat('compacts','🚙 Compacts',this)">🚙 Compacts <span class="tab-count">14</span></div>
+          <div class="cat-option" onclick="selectCat('sedans','🚗 Sedans',this)">🚗 Sedans <span class="tab-count">30</span></div>
+          <div class="cat-option" onclick="selectCat('classique','🏛️ Sport Classique',this)">🏛️ Sport Classique <span class="tab-count">38</span></div>
+          <div class="cat-option" onclick="selectCat('vans','🚐 Vans',this)">🚐 Vans <span class="tab-count">22</span></div>
+          <div class="cat-option" onclick="selectCat('coupes','🚘 Coupés',this)">🚘 Coupés <span class="tab-count">16</span></div>
+          <div class="cat-option" onclick="selectCat('super','⚡ Super',this)">⚡ Super <span class="tab-count">53</span></div>
+          <div class="cat-option" onclick="selectCat('offroad','🏔️ Off Road',this)">🏔️ Off Road <span class="tab-count">31</span></div>
+          <div class="cat-option" onclick="selectCat('suv','🚙 SUV',this)">🚙 SUV <span class="tab-count">35</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="controls-bar">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Rechercher un véhicule..." oninput="filterCars()">
+    </div>
+    <div class="filter-btns" id="filterBtns">
+      <button class="filter-btn active" onclick="setFilter('all',this)">Tous</button>
+      <button class="filter-btn" onclick="setFilter('low',this)" id="f-low">— 1M$</button>
+      <button class="filter-btn" onclick="setFilter('mid',this)" id="f-mid">1M — 2M$</button>
+      <button class="filter-btn" onclick="setFilter('high',this)" id="f-high">+ 2M$</button>
+    </div>
+    <select class="sort-select" id="sortSelect" onchange="filterCars()">
+      <option value="name">Nom A→Z</option>
+      <option value="name-desc">Nom Z→A</option>
+      <option value="price-asc">Prix croissant</option>
+      <option value="price-desc">Prix décroissant</option>
+    </select>
+  </div>
+</div>
+
+<main>
+  <div class="results-bar">
+    <div class="results-info"><strong id="countDisplay">0</strong> véhicules disponibles</div>
+    <div class="category-label" id="categoryLabel">Catégorie — Sport</div>
+  </div>
+  <div class="grid" id="carGrid"></div>
+</main>
+
+<div class="modal-overlay" id="modal" onclick="closeModalBg(event)">
+  <div class="modal">
+    <div class="modal-img-wrap"><img id="modalImg" src="" alt=""></div>
+    <div class="modal-body">
+      <div class="modal-eyebrow">Élite Vinewood — Meta RP</div>
+      <div class="modal-cat" id="modalCat">Sport</div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-note">Pour acquérir ce véhicule, rendez-vous à la concession <strong style="color:var(--gold-dim)">Élite Vinewood</strong> in-game ou contactez un vendeur disponible sur le serveur.</div>
+      <div class="modal-actions">
+        <a href="https://discord.gg/zAdUxjYHTF" target="_blank" style="flex:1;text-decoration:none;"><button class="btn-primary" style="width:100%">📞 Contacter un vendeur</button></a>
+        <button class="btn-close" onclick="document.getElementById('modal').classList.remove('open')">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><strong>Élite Vinewood</strong> &mdash; Catalogue Officiel &mdash; GTA RP</footer>
+
+<script>
+function imgUrl(model) { return `https://vittura.github.io/catalogue-vinewood/img/${model}.png`; };
+
+function imgUrl(model) {
+  // Primary: use Wikimedia GTA wiki thumbnails via Special:FilePath
+  const wikiNames = {
+    alpha:'Alpha-GTAV-front',banshee:'Banshee-GTAV-front',bestiagts:'BestiaGTS-GTAV-front',
+    blista2:'BlistaCompact-GTAV-front',buffalo:'Buffalo-GTAV-front',buffalo2:'BuffaloS-GTAV-front',
+    calico:'CalicoGTF-GTAO-front',carbonizzare:'Carbonizzare-GTAV-front',comet2:'Comet2-GTAV-front',
+    comet3:'CometRetroCustom-GTAO-front',comet4:'CometSafari-GTAO-front',comet5:'CometSR-GTAO-front',
+    comet6:'CometS2-GTAO-front',comet7:'CometS2Cabrio-GTAO-front',comet8:'Comet8-GTAO-front',
+    coquette:'Coquette-GTAV-front',coquette2:'CoquetteBlackFin-GTAO-front',coquette3:'CoquetteD10-GTAO-front',
+    coquette4:'CoquetteClassic-GTAO-front',cypher:'Cypher-GTAO-front',tampa3:'TampaDrift-GTAO-front',
+    elegy:'ElegyRH8-GTAV-front',elegy2:'ElegyRetroCustom-GTAO-front',euros:'Euros-GTAO-front',
+    feltzer2:'Feltzer-GTAV-front',flashgt:'FlashGT-GTAO-front',furoregt:'FuroreGT-GTAV-front',
+    fusilade:'Fusilade-GTAV-front',futo:'Futo-GTAV-front',futo2:'FutoGTX-GTAO-front',
+    gb200:'GB200-GTAO-front',growler:'Growler-GTAO-front',hotring:'HotringSabre-GTAO-front',
+    hellfire:'HotringHellfire-GTAO-front',imorgon:'Imorgon-GTAO-front',
+    italigto:'ItaliGTO-GTAO-front',italirsx:'ItaliRSX-GTAO-front',italigto2:'ItaliGTOStingerTT-GTAO-front',
+    issi4:'IssiSport-GTAO-front',jester:'Jester-GTAV-front',jester2:'JesterRacecar-GTAO-front',
+    jester3:'JesterClassic-GTAO-front',jester4:'JesterRR-GTAO-front',jugular:'Jugular-GTAO-front',
+    khamelion:'Khamelion-GTAV-front',komoda:'Komoda-GTAO-front',kuruma:'Kuruma-GTAO-front',
+    locust:'Locust-GTAO-front',lynx:'Lynx-GTAO-front',massacro:'Massacro-GTAV-front',
+    massacro2:'MassacroRacecar-GTAO-front',neo:'Neo-GTAO-front',neon:'Neon-GTAO-front',
+    omnis:'Omnis-GTAO-front',paragon:'ParagonR-GTAO-front',pariah:'Pariah-GTAO-front',
+    penumbra:'Penumbra-GTAV-front',penumbra2:'PenumbraFF-GTAO-front',raiden:'Raiden-GTAO-front',
+    rapidgt:'RapidGT-GTAV-front',raptor2:'Raptor-GTAO-front',remus:'Remus-GTAO-front',
+    rt3000:'RT3000-GTAO-front',ruston:'Ruston-GTAO-front',schafter4:'SchafterLWB-GTAO-front',
+    schafter5:'SchafterV12-GTAO-front',schlagen:'SchlagenGT-GTAO-front',schwarzer:'Schwartzer-GTAV-front',
+    sentinel3:'SentinelClassic-GTAO-front',seven70:'Seven70-GTAO-front',specter:'Specter-GTAO-front',
+    specter2:'SpecterCustom-GTAO-front',streiter:'Streiter-GTAO-front',sugoi:'Sugoi-GTAO-front',
+    sultan:'Sultan-GTAV-front',sultan2:'SultanClassic-GTAO-front',sultan3:'SultanRSClassic-GTAO-front',
+    tropos:'TroposRallye-GTAO-front',vectre:'Vectre-GTAO-front',verlierer:'Verlierer-GTAO-front',
+    vstr:'VSTR-GTAO-front',zr350:'ZR350-GTAO-front',thrax:'300R-GTAO-front',
+    corsita:'Corsita-GTAO-front',ninef:'9F-GTAV-front',ninef2:'9FCabrio-GTAV-front',
+    eightf:'8FDrafter-GTAO-front',surano:'Surano-GTAV-front',
+    // Muscle
+    dukes2:'BeaterDukes-GTAO-front',blade:'Blade-GTAV-front',brigham:'Brigham-GTAO-front',
+    broadway:'Broadway-GTAO-front',buccaneer:'Buccaneer-GTAV-front',buccaneer2:'BuccaneerCustom-GTAO-front',
+    chino:'Chino-GTAO-front',chino2:'ChinoCustom-GTAO-front',clique:'Clique-GTAO-front',
+    clique2:'CliqueBreak-GTAO-front',deviant:'Deviant-GTAO-front',dominator:'Dominator-GTAV-front',
+    dominator3:'DominatorGTX-GTAO-front',dominator8:'DominatorGT-GTAO-front',eudora:'Eudora-GTAO-front',
+    faction:'Faction-GTAV-front',faction2:'FactionCustom-GTAO-front',faction3:'FactionCustomDonk-GTAO-front',
+    ellie:'Ellie-GTAO-front',gauntlet:'Gauntlet-GTAV-front',gauntlet2:'GauntletClassic-GTAO-front',
+    gauntlet3:'GauntletClassicCustom-GTAO-front',gauntlet4:'GauntletHellfire-GTAO-front',
+    greenwood:'Greenwood-GTAO-front',hermes:'Hermes-GTAO-front',hotknife:'Hotknife-GTAV-front',
+    hustler:'Hustler-GTAO-front',impaler:'Impaler-GTAO-front',impaler2:'ImpalerSZ-GTAO-front',
+    impaler3:'ImpalerLX-GTAO-front',manana2:'MananaCustom-GTAO-front',moonbeam:'Moonbeam-GTAV-front',
+    moonbeam2:'MoonbeamCustom-GTAO-front',nightshade:'Nightshade-GTAO-front',peyote2:'PeyoteGasser-GTAO-front',
+    phoenix:'Phoenix-GTAV-front',picador:'Picador-GTAV-front',ratloader:'RatLoader-GTAV-front',
+    ratloader2:'RatTruck-GTAO-front',ruiner:'Ruiner-GTAV-front',ruiner4:'RuinerZZ8-GTAO-front',
+    sabre2:'SabreTurbo-GTAO-front',sabre3:'SabreTurboCustom-GTAO-front',slamvan:'Slamvan-GTAV-front',
+    slamvan2:'SlamvanCustom-GTAO-front',stallion:'Stallion-GTAV-front',tahoma:'TahomaCoupé-GTAO-front',
+    tampa:'Tampa-GTAV-front',tulip:'Tulip-GTAO-front',tulip2:'TulipM100-GTAO-front',
+    vamos:'Vamos-GTAO-front',vigero:'Vigero-GTAV-front',vigero2:'VigeroZX-GTAO-front',
+    vigero3:'VigeroZXConvertible-GTAO-front',virgo:'Virgo-GTAO-front',virgo2:'VirgoClassic-GTAO-front',
+    virgo3:'VirgoClassicCustom-GTAO-front',voodoo:'Voodoo-GTAV-front',voodoo2:'VoodooCustom-GTAO-front',
+    weevil2:'WeevilCustom-GTAO-front',yosemite:'Yosemite-GTAV-front',yosemite2:'YosemiteDrift-GTAO-front',
+    // Compacts
+    asbo:'Asbo-GTAO-front',blista:'Blista-GTAV-front',kanjo:'BlistaKanjo-GTAO-front',
+    brioso:'BriosoRA-GTAO-front',brioso2:'Brioso300-GTAO-front',brioso3:'Brioso300Widebody-GTAO-front',
+    club:'Club-GTAO-front',dilettante:'Dilettante-GTAV-front',issi:'Issi-GTAV-front',
+    issi2:'Issi2-GTAO-front',panto:'Panto-GTAV-front',prairie:'Prairie-GTAO-front',
+    rhapsody:'Rhapsody-GTAV-front',weevil:'Weevil-GTAO-front',
+    // Sedans
+    asea:'Asea-GTAV-front',asterope:'Asterope-GTAV-front',asterope2:'AsteropeGZ-GTAO-front',
+    cog55:'Cognoscenti55-GTAV-front',cognoscenti:'Cognoscenti-GTAV-front',emperor:'Emperor-GTAV-front',
+    emperor2:'Emperor2-GTAV-front',emperor3:'Emperor3-GTAV-front',fugitive:'Fugitive-GTAV-front',
+    glendale:'Glendale-GTAO-front',glendale2:'GlendaleCustom-GTAO-front',ingot:'Ingot-GTAV-front',
+    intruder:'Intruder-GTAV-front',premier:'Premier-GTAV-front',primo:'Primo-GTAV-front',
+    primo2:'PrimoCustom-GTAO-front',regina:'Regina-GTAV-front',rhinehart:'Rhinehart-GTAO-front',
+    schafter:'Schafter-GTAV-front',sherman:'Sherman-GTAO-front',stafford:'Stafford-GTAO-front',
+    stanier:'Stanier-GTAV-front',stratum:'Stratum-GTAV-front',stretch:'Stretch-GTAV-front',
+    superd:'SuperDiamond-GTAV-front',surge:'Surge-GTAV-front',tailgater:'Tailgater-GTAV-front',
+    tailgater2:'TailgaterS-GTAO-front',warrener:'Warrener-GTAV-front',warrener2:'WarrenerHKR-GTAO-front',
+    washington:'Washington-GTAV-front',
+    // Sport Classique
+    z190:'190z-GTAO-front',casco:'Casco-GTAO-front',cheburek:'Cheburek-GTAO-front',
+    cheetahclassic:'CheetahClassic-GTAO-front',dynasty:'Dynasty-GTAO-front',fagaloa:'Fagaloa-GTAO-front',
+    frankenstange:'FrankenStange-GTAO-front',gt500:'GT500-GTAO-front',everon:'HotringEveron-GTAO-front',
+    jb7002:'JB700W-GTAO-front',mamba:'Mamba-GTAO-front',manana:'Manana-GTAV-front',
+    michelli:'MichelliGT-GTAO-front',monroe:'Monroe-GTAO-front',nebula:'NebulaTurbo-GTAO-front',
+    panthere:'Panthere-GTAO-front',peyote:'Peyote-GTAV-front',peyote3:'PeyoteCustom-GTAO-front',
+    pigalle:'Pigalle-GTAV-front',rapidgt3:'RapidGTClassic-GTAO-front',retinue:'Retinue-GTAO-front',
+    revolter:'Revolter-GTAO-front',roosevelt:'Roosevelt-GTAO-front',roosevelt2:'RooseveltValor-GTAO-front',
+    savestra:'Savestra-GTAO-front',sm722:'SM722-GTAO-front',stinger:'Stinger-GTAV-front',
+    stingergt:'StingerGT-GTAV-front',stirlinggt:'StirlingGT-GTAO-front',swinger:'Swinger-GTAO-front',
+    tornado:'Tornado-GTAV-front',tornado2:'Tornado2-GTAV-front',tornado3:'Tornado3-GTAV-front',
+    tornado4:'Tornado4-GTAV-front',tornado5:'TornadoRatRod-GTAO-front',turismor:'TurismoClassic-GTAO-front',
+    ztype:'ZType-GTAO-front',zionclassic:'ZionClassic-GTAO-front',
+    // Vans
+    bison:'Bison-GTAV-front',bobcatxl:'BobcatXL-GTAV-front',burrito:'Burrito-GTAV-front',
+    burrito2:'Burrito2-GTAV-front',burrito3:'GangBurrito-GTAO-front',burrito4:'GangBurrito2-GTAO-front',
+    camper:'Camper-GTAV-front',clown:'ClownVan-GTAO-front',journey:'Journey-GTAV-front',
+    journey2:'JourneyII-GTAO-front',minivan:'Minivan-GTAV-front',minivan2:'MinivanCustom-GTAO-front',
+    paradise:'Paradise-GTAO-front',pony:'Pony-GTAV-front',rumpo:'Rumpo-GTAV-front',
+    speedo:'Speedo-GTAV-front',surfer:'Surfer-GTAV-front',surfer2:'Surfer2-GTAV-front',
+    surfer3:'SurferCustom-GTAO-front',youga:'Youga-GTAV-front',youga2:'YougaClassic-GTAO-front',
+    youga3:'YougaClassic4x4-GTAO-front',
+  };
+  const wikiName = wikiNames[model];
+  if (wikiName) return `https://gta.fandom.com/wiki/Special:FilePath/${wikiName}.png`;
+  return '';
+}
+
+const DATA = {
+  sport: {
+    label: "Sport",
+    cars: [
+      { name:"Alpha",                price:750000,  model:"alpha" },
+      { name:"Banshee",              price:825000,  model:"banshee" },
+      { name:"Bestia GTS",           price:900000,  model:"bestiagts" },
+      { name:"Blista Compact",       price:350000,  model:"blista2" },
+      { name:"Buffalo",              price:450000,  model:"buffalo" },
+      { name:"Buffalo S",            price:500000,  model:"buffalo2" },
+      { name:"Calico GTF",           price:650000,  model:"calico" },
+      { name:"Carbonizzare",         price:950000,  model:"carbonizzare" },
+      { name:"Comet",                price:850000,  model:"comet2" },
+      { name:"Comet Rétro Custom",   price:900000,  model:"comet3" },
+      { name:"Comet Safari",         price:800000,  model:"comet4" },
+      { name:"Comet S2",             price:1200000, model:"comet6" },
+      { name:"Comet SR",             price:1000000, model:"comet5" },
+      { name:"Coquette",             price:1000000, model:"coquette" },
+      { name:"Coquette D10",         price:1400000, model:"coquette3" },
+      { name:"Cypher",               price:1100000, model:"cypher" },
+      { name:"Tampa Drift",          price:750000,  model:"tampa3" },
+      { name:"Elegy RH8",            price:1100000, model:"elegy" },
+      { name:"Elegy Rétro Custom",   price:1200000, model:"elegy2" },
+      { name:"Euros",                price:950000,  model:"euros" },
+      { name:"Feltzer",              price:1100000, model:"feltzer2" },
+      { name:"Flash GT",             price:650000,  model:"flashgt" },
+      { name:"Furore GT",            price:1100000, model:"furoregt" },
+      { name:"Fusilade",             price:700000,  model:"fusilade" },
+      { name:"Futo GTX",             price:550000,  model:"futo2" },
+      { name:"Futo",                 price:500000,  model:"futo" },
+      { name:"GB200",                price:800000,  model:"gb200" },
+      { name:"Growler",              price:1100000, model:"growler" },
+      { name:"Hotring Sabre",        price:700000,  model:"hotring" },
+      { name:"Imorgon",              price:2500000, model:"imorgon" },
+      { name:"Itali GTO",            price:2000000, model:"italigto" },
+      { name:"Itali RSX",            price:2200000, model:"italirsx" },
+      { name:"Issi Sport",           price:750000,  model:"issi4" },
+      { name:"Jester",               price:850000,  model:"jester" },
+      { name:"Jester (Course)",      price:875000,  model:"jester2" },
+      { name:"Jester Classique",     price:950000,  model:"jester3" },
+      { name:"Jester RR",            price:1200000, model:"jester4" },
+      { name:"Jugular",              price:1400000, model:"jugular" },
+      { name:"Khamelion",            price:450000,  model:"khamelion" },
+      { name:"Komoda",               price:1300000, model:"komoda" },
+      { name:"Kuruma",               price:900000,  model:"kuruma" },
+      { name:"Locust",               price:950000,  model:"locust" },
+      { name:"Lynx",                 price:1100000, model:"lynx" },
+      { name:"Massacro",             price:1600000, model:"massacro" },
+      { name:"Massacro (Course)",    price:1700000, model:"massacro2" },
+      { name:"Neo",                  price:1800000, model:"neo" },
+      { name:"Neon",                 price:1200000, model:"neon" },
+      { name:"Omnis",                price:1000000, model:"omnis" },
+      { name:"Paragon R",            price:1500000, model:"paragon" },
+      { name:"Pariah",               price:1800000, model:"pariah" },
+      { name:"Penumbra",             price:550000,  model:"penumbra" },
+      { name:"Penumbra FF",          price:700000,  model:"penumbra2" },
+      { name:"Raiden",               price:1200000, model:"raiden" },
+      { name:"Rapid GT",             price:1400000, model:"rapidgt" },
+      { name:"Raptor",               price:850000,  model:"raptor2" },
+      { name:"Remus",                price:900000,  model:"remus" },
+      { name:"RT3000",               price:850000,  model:"rt3000" },
+      { name:"Ruston",               price:1100000, model:"ruston" },
+      { name:"Schafter LWB",         price:750000,  model:"schafter4" },
+      { name:"Schafter V12",         price:900000,  model:"schafter5" },
+      { name:"Schlagen GT",          price:1800000, model:"schlagen" },
+      { name:"Schwartzer",           price:700000,  model:"schwarzer" },
+      { name:"Sentinel Classique",   price:950000,  model:"sentinel3" },
+      { name:"Seven-70",             price:1200000, model:"seven70" },
+      { name:"Specter",              price:1400000, model:"specter" },
+      { name:"Specter Custom",       price:1400000, model:"specter2" },
+      { name:"Streiter",             price:650000,  model:"streiter" },
+      { name:"Sugoi",                price:850000,  model:"sugoi" },
+      { name:"Sultan",               price:700000,  model:"sultan" },
+      { name:"Sultan Classique",     price:850000,  model:"sultan2" },
+      { name:"Tropos Rallye",        price:650000,  model:"tropos" },
+      { name:"Vectre",               price:1200000, model:"vectre" },
+      { name:"Verlierer",            price:1100000, model:"verlierer" },
+      { name:"V-STR",                price:1400000, model:"vstr" },
+      { name:"ZR350",                price:1100000, model:"zr350" },
+      { name:"Comet S2 Cabrio",      price:1500000, model:"comet7" },
+      { name:"300R",                 price:1000000, model:"thrax" },
+      { name:"Corsita",              price:2200000, model:"corsita" },
+      { name:"9F",                   price:2000000, model:"ninef" },
+      { name:"9F Cabrio",            price:2500000, model:"ninef2" },
+      { name:"Itali GTO Stinger TT", price:4000000, model:"italigto2" },
+      { name:"La Coureuse",          price:1500000, model:"comet8" },
+      { name:"Hotring Hellfire",     price:800000,  model:"hellfire" },
+      { name:"Sultan RS Classique",  price:900000,  model:"sultan3" },
+      { name:"Surano",               price:950000,  model:"surano" },
+      { name:"8F Drafter",           price:1500000, model:"eightf" },
+    ]
+  },
+  muscle: {
+    label: "Muscle",
+    cars: [
+      { name:"Beater Dukes",           price:400000,  model:"dukes2" },
+      { name:"Blade",                  price:425000,  model:"blade" },
+      { name:"Brigham",                price:550000,  model:"brigham" },
+      { name:"Broadway",               price:475000,  model:"broadway" },
+      { name:"Buccaneer",              price:525000,  model:"buccaneer" },
+      { name:"Buccaneer Custom",       price:625000,  model:"buccaneer2" },
+      { name:"Chino",                  price:600000,  model:"chino" },
+      { name:"Chino Custom",           price:625000,  model:"chino2" },
+      { name:"Clique",                 price:675000,  model:"clique" },
+      { name:"Clique Break",           price:400000,  model:"clique2" },
+      { name:"Coquette BlackFin",      price:700000,  model:"coquette2" },
+      { name:"Deviant",                price:800000,  model:"deviant" },
+      { name:"Dominator",              price:450000,  model:"dominator" },
+      { name:"Dominator GT",           price:900000,  model:"dominator8" },
+      { name:"Dominator GTX",          price:700000,  model:"dominator3" },
+      { name:"Eudora",                 price:450000,  model:"eudora" },
+      { name:"Faction",                price:450000,  model:"faction" },
+      { name:"Faction Custom",         price:500000,  model:"faction2" },
+      { name:"Faction Custom Donk",    price:550000,  model:"faction3" },
+      { name:"Ellie",                  price:550000,  model:"ellie" },
+      { name:"Gauntlet",               price:500000,  model:"gauntlet" },
+      { name:"Gauntlet Classique",     price:550000,  model:"gauntlet2" },
+      { name:"Gauntlet Classique Custom", price:600000, model:"gauntlet3" },
+      { name:"Gauntlet Hellfire",      price:800000,  model:"gauntlet4" },
+      { name:"Greenwood",              price:475000,  model:"greenwood" },
+      { name:"Hermes",                 price:325000,  model:"hermes" },
+      { name:"Hotknife",               price:350000,  model:"hotknife" },
+      { name:"Hustler",                price:400000,  model:"hustler" },
+      { name:"Impaler",                price:400000,  model:"impaler" },
+      { name:"Impaler LX",             price:600000,  model:"impaler3" },
+      { name:"Impaler SZ",             price:500000,  model:"impaler2" },
+      { name:"Manana Custom",          price:400000,  model:"manana2" },
+      { name:"Moonbeam",               price:450000,  model:"moonbeam" },
+      { name:"Moonbeam Custom",        price:500000,  model:"moonbeam2" },
+      { name:"Nightshade",             price:550000,  model:"nightshade" },
+      { name:"Peyote Gasser",          price:600000,  model:"peyote2" },
+      { name:"Phoenix",                price:450000,  model:"phoenix" },
+      { name:"Picador",                price:425000,  model:"picador" },
+      { name:"Rat-Loader",             price:200000,  model:"ratloader" },
+      { name:"Rat-Truck",              price:425000,  model:"ratloader2" },
+      { name:"Ruiner",                 price:550000,  model:"ruiner" },
+      { name:"Ruiner ZZ-8",            price:500000,  model:"ruiner4" },
+      { name:"Sabre Turbo",            price:575000,  model:"sabre2" },
+      { name:"Sabre Turbo Custom",     price:600000,  model:"sabre3" },
+      { name:"Slamvan",                price:475000,  model:"slamvan" },
+      { name:"Slamvan Custom",         price:500000,  model:"slamvan2" },
+      { name:"Stallion",               price:525000,  model:"stallion" },
+      { name:"Tahoma Coupé",           price:525000,  model:"tahoma" },
+      { name:"Tampa",                  price:450000,  model:"tampa" },
+      { name:"Tulip",                  price:525000,  model:"tulip" },
+      { name:"Tulip M-100",            price:575000,  model:"tulip2" },
+      { name:"Vamos",                  price:575000,  model:"vamos" },
+      { name:"Vigero",                 price:500000,  model:"vigero" },
+      { name:"Vigero ZX",              price:750000,  model:"vigero2" },
+      { name:"Vigero ZX Décapotable",  price:800000,  model:"vigero3" },
+      { name:"Virgo",                  price:425000,  model:"virgo" },
+      { name:"Virgo Classique",        price:475000,  model:"virgo2" },
+      { name:"Virgo Classique Custom", price:525000,  model:"virgo3" },
+      { name:"Voodoo",                 price:450000,  model:"voodoo" },
+      { name:"Voodoo Custom",          price:425000,  model:"voodoo2" },
+      { name:"Weevil Custom",          price:500000,  model:"weevil2" },
+      { name:"Yosemite",               price:550000,  model:"yosemite" },
+      { name:"Yosemite Drift",         price:725000,  model:"yosemite2" },
+    ]
+  },
+  compacts: {
+    label: "Compacts",
+    cars: [
+      { name:"Asbo",             price:25000,  model:"asbo" },
+      { name:"Blista",           price:25000,  model:"blista" },
+      { name:"Blista Kanjo",     price:150000, model:"kanjo" },
+      { name:"Brioso 300",       price:170000, model:"brioso2" },
+      { name:"Brioso 300 Large", price:200000, model:"brioso3" },
+      { name:"Brioso R/A",       price:160000, model:"brioso" },
+      { name:"Club",             price:100000, model:"club" },
+      { name:"Dilettante",       price:80000,  model:"dilettante" },
+      { name:"Issi",             price:100000, model:"issi2" },
+      { name:"Issi Classique",   price:150000, model:"issi" },
+      { name:"Panto",            price:45000,  model:"panto" },
+      { name:"Prairie",          price:125000, model:"prairie" },
+      { name:"Rhapsody",         price:125000, model:"rhapsody" },
+      { name:"Weevil",           price:90000,  model:"weevil" },
+    ]
+  }  ,
+  sedans: {
+    label: "Sedans",
+    cars: [
+      { name:"Asea",           price:150000,  model:"asea" },
+      { name:"Asterope",       price:175000,  model:"asterope" },
+      { name:"Asterope GZ",    price:450000,  model:"asterope2" },
+      { name:"Cognoscenti",    price:650000,  model:"cog55" },
+      { name:"Cognoscenti 55", price:675000,  model:"cognoscenti" },
+      { name:"Emperor",        price:150000,  model:"emperor" },
+      { name:"Emperor (Rouillé)", price:150000, model:"emperor2" },
+      { name:"Emperor (Neige)", price:150000, model:"emperor3" },
+      { name:"Fugitive",       price:325000,  model:"fugitive" },
+      { name:"Glendale",       price:300000,  model:"glendale" },
+      { name:"Glendale Custom",price:350000,  model:"glendale2" },
+      { name:"Ingot",          price:150000,  model:"ingot" },
+      { name:"Intruder",       price:150000,  model:"intruder" },
+      { name:"Premier",        price:175000,  model:"premier" },
+      { name:"Primo",          price:250000,  model:"primo" },
+      { name:"Primo Custom",   price:325000,  model:"primo2" },
+      { name:"Regina",         price:200000,  model:"regina" },
+      { name:"Rhinehart",      price:750000,  model:"rhinehart" },
+      { name:"Schafter",       price:225000,  model:"schafter" },
+      { name:"Sherman",        price:750000,  model:"sherman" },
+      { name:"Stafford",       price:300000,  model:"stafford" },
+      { name:"Stanier",        price:250000,  model:"stanier" },
+      { name:"Stratum",        price:250000,  model:"stratum" },
+      { name:"Stretch",        price:10000000,model:"stretch" },
+      { name:"Super Diamond",  price:800000,  model:"superd" },
+      { name:"Surge",          price:125000,  model:"surge" },
+      { name:"Tailgater",      price:325000,  model:"tailgater" },
+      { name:"Tailgater S",    price:650000,  model:"tailgater2" },
+      { name:"Warrener",       price:425000,  model:"warrener" },
+      { name:"Warrener HKR",   price:500000,  model:"warrener2" },
+      { name:"Washington",     price:325000,  model:"washington" },
+    ]
+  }  ,
+  classique: {
+    label: "Sport Classique",
+    cars: [
+      { name:"190z",               price:800000,  model:"z190" },
+      { name:"Casco",              price:950000,  model:"casco" },
+      { name:"Cheburek",           price:650000,  model:"cheburek" },
+      { name:"Cheetah Classique",  price:1200000, model:"cheetahclassic" },
+      { name:"Coquette Classique", price:1400000, model:"coquette4" },
+      { name:"Dynasty",            price:650000,  model:"dynasty" },
+      { name:"Fagaloa",            price:450000,  model:"fagaloa" },
+      { name:"Fränken Stange",     price:850000,  model:"frankenstange" },
+      { name:"GT500",              price:1100000, model:"gt500" },
+      { name:"Hotring Everon",     price:1000000, model:"everon" },
+      { name:"JB 700W",            price:900000,  model:"jb7002" },
+      { name:"Mamba",              price:1200000, model:"mamba" },
+      { name:"Manana",             price:350000,  model:"manana" },
+      { name:"Michelli GT",        price:450000,  model:"michelli" },
+      { name:"Monroe",             price:1100000, model:"monroe" },
+      { name:"Nebula Turbo",       price:350000,  model:"nebula" },
+      { name:"Panthere",           price:1600000, model:"panthere" },
+      { name:"Peyote",             price:200000,  model:"peyote" },
+      { name:"Peyote Custom",      price:350000,  model:"peyote3" },
+      { name:"Pigalle",            price:400000,  model:"pigalle" },
+      { name:"Rapid GT Classique", price:700000,  model:"rapidgt3" },
+      { name:"Retinue",            price:750000,  model:"retinue" },
+      { name:"Revolter",           price:1200000, model:"revolter" },
+      { name:"Roosevelt",          price:850000,  model:"roosevelt" },
+      { name:"Roosevelt Valor",    price:900000,  model:"roosevelt2" },
+      { name:"Savestra",           price:650000,  model:"savestra" },
+      { name:"SM722",              price:1400000, model:"sm722" },
+      { name:"Stinger",            price:750000,  model:"stinger" },
+      { name:"Stinger GT",         price:800000,  model:"stingergt" },
+      { name:"Stirling GT",        price:900000,  model:"stirlinggt" },
+      { name:"Swinger",            price:1500000, model:"swinger" },
+      { name:"Tornado",            price:250000,  model:"tornado" },
+      { name:"Tornado (Décap.)",   price:300000,  model:"tornado2" },
+      { name:"Tornado (Rat Rod)",  price:200000,  model:"tornado3" },
+      { name:"Tornado Custom",     price:350000,  model:"tornado4" },
+      { name:"Tornado Rat Rod",    price:600000,  model:"tornado5" },
+      { name:"Turismo Classique",  price:1400000, model:"turismor" },
+      { name:"Z-Type",             price:1000000, model:"ztype" },
+      { name:"Zion Classique",     price:1100000, model:"zionclassic" },
+    ]
+  }  ,
+  vans: {
+    label: "Vans",
+    cars: [
+      { name:"Bison",                price:600000,  model:"bison" },
+      { name:"Bobcat XL",            price:700000,  model:"bobcatxl" },
+      { name:"Burrito",              price:900000,  model:"burrito" },
+      { name:"Burrito (Custom)",     price:1000000, model:"burrito2" },
+      { name:"Burrito de Gang",      price:800000,  model:"burrito3" },
+      { name:"Burrito de Gang II",   price:750000,  model:"burrito4" },
+      { name:"Camper",               price:700000,  model:"camper" },
+      { name:"Van de Clown",         price:900000,  model:"clown" },
+      { name:"Journey",              price:250000,  model:"journey" },
+      { name:"Journey II",           price:400000,  model:"journey2" },
+      { name:"Minivan",              price:500000,  model:"minivan" },
+      { name:"Minivan Custom",       price:700000,  model:"minivan2" },
+      { name:"Paradise",             price:800000,  model:"paradise" },
+      { name:"Pony",                 price:750000,  model:"pony" },
+      { name:"Rumpo",                price:1000000, model:"rumpo" },
+      { name:"Speedo",               price:1500000, model:"speedo" },
+      { name:"Surfer",               price:600000,  model:"surfer" },
+      { name:"Surfer (Rouillé)",     price:300000,  model:"surfer2" },
+      { name:"Surfer Custom",        price:350000,  model:"surfer3" },
+      { name:"Youga",                price:750000,  model:"youga" },
+      { name:"Youga Classique",      price:800000,  model:"youga2" },
+      { name:"Youga Classique 4x4",  price:1000000, model:"youga3" },
+    ]
+  }  ,
+  coupes: {
+    label: "Coupés",
+    cars: [
+      { name:"Cognoscenti Cabrio", price:525000, model:"cogcabrio" },
+      { name:"Exemplar",           price:450000, model:"exemplar" },
+      { name:"F620",               price:400000, model:"f620" },
+      { name:"Felon",              price:350000, model:"felon" },
+      { name:"Felon GT",           price:400000, model:"felon2" },
+      { name:"FR36",               price:1600000,model:"fr36" },
+      { name:"Jackal",             price:375000, model:"jackal" },
+      { name:"Oracle",             price:300000, model:"oracle" },
+      { name:"Oracle XS",          price:325000, model:"oracle2" },
+      { name:"Previon",            price:200000, model:"previon" },
+      { name:"Sentinel",           price:350000, model:"sentinel" },
+      { name:"Sentinel XS",        price:375000, model:"sentinel2" },
+      { name:"Windsor",            price:975000, model:"windsor" },
+      { name:"Windsor Drop",       price:1100000,model:"windsor2" },
+      { name:"Zion",               price:350000, model:"zion" },
+      { name:"Zion Cabrio",        price:375000, model:"zion2" },
+    ]
+  }  ,
+  super: {
+    label: "Super",
+    cars: [
+      { name:"811",              price:1200000,  model:"pfister811" },
+      { name:"Adder",            price:5200000,  model:"adder" },
+      { name:"Autarch",          price:6000000,  model:"autarch" },
+      { name:"Banshee 900R",     price:1500000,  model:"banshee2" },
+      { name:"Bullet",           price:1400000,  model:"bullet" },
+      { name:"Cheetah",          price:1800000,  model:"cheetah" },
+      { name:"Cyclone",          price:1300000,  model:"cyclone" },
+      { name:"Deveste Eight",    price:6500000,  model:"deveste" },
+      { name:"Emerus",           price:2000000,  model:"emerus" },
+      { name:"Entity MT",        price:10500000, model:"entitymt" },
+      { name:"Entity XF",        price:1800000,  model:"entityxf" },
+      { name:"Entity XXR",       price:2200000,  model:"entityxxr" },
+      { name:"FMJ",              price:3000000,  model:"fmj" },
+      { name:"Furia",            price:2700000,  model:"furia" },
+      { name:"GP1",              price:3500000,  model:"gp1" },
+      { name:"Ignus",            price:3200000,  model:"ignus" },
+      { name:"Infernus",         price:2000000,  model:"infernus" },
+      { name:"Itali GTB",        price:2500000,  model:"italigt" },
+      { name:"Itali GTB Custom", price:2900000,  model:"italigtb2" },
+      { name:"Krieger",          price:2700000,  model:"krieger" },
+      { name:"LM87",             price:10000000, model:"lm87" },
+      { name:"Nero",             price:6000000,  model:"nero" },
+      { name:"Nero Custom",      price:6800000,  model:"nero2" },
+      { name:"Osiris",           price:5000000,  model:"osiris" },
+      { name:"Penetrator",       price:2500000,  model:"penetrator" },
+      { name:"RE-7B",            price:5000000,  model:"re7b" },
+      { name:"Reaper",           price:8000000,  model:"reaper" },
+      { name:"S80RR",            price:7000000,  model:"s80" },
+      { name:"SC1",              price:2500000,  model:"sc1" },
+      { name:"Sultan RS",        price:1500000,  model:"sultanrs" },
+      { name:"T20",              price:2500000,  model:"t20" },
+      { name:"Taipan",           price:3000000,  model:"taipan" },
+      { name:"Tempesta",         price:4000000,  model:"tempesta" },
+      { name:"Tezeract",         price:6000000,  model:"tezeract" },
+      { name:"Thrax",            price:9000000,  model:"thrax2" },
+      { name:"Tigon",            price:6000000,  model:"tigon" },
+      { name:"Torero",           price:11000000, model:"torero" },
+      { name:"Torero XO",        price:4000000,  model:"toreador" },
+      { name:"Turismo Omaggio",  price:4000000,  model:"turismoii" },
+      { name:"Turismo R",        price:6500000,  model:"turismor" },
+      { name:"Tyrant",           price:8000000,  model:"tyrant" },
+      { name:"Tyrus",            price:9000000,  model:"tyrus" },
+      { name:"Vacca",            price:5000000,  model:"vacca" },
+      { name:"Vagner",           price:8500000,  model:"vagner" },
+      { name:"Visione",          price:9500000,  model:"visione" },
+      { name:"Voltic",           price:1500000,  model:"voltic" },
+      { name:"XA-21",            price:6500000,  model:"xa21" },
+      { name:"X80 Proto",        price:12000000, model:"x80proto" },
+      { name:"Zeno",             price:10000000, model:"zeno" },
+      { name:"Zentorno",         price:6000000,  model:"zentorno" },
+      { name:"Zorrusso",         price:7500000,  model:"zorrusso" },
+      { name:"10F",              price:9500000,  model:"tenf" },
+      { name:"10F Large",        price:10500000, model:"tenf2" },
+    ]
+  }  ,
+  offroad: {
+    label: "Off Road",
+    cars: [
+      { name:"Bifta",           price:250000,  model:"bifta" },
+      { name:"Blazer",          price:200000,  model:"blazer" },
+      { name:"Blazer Street",   price:350000,  model:"blazer5" },
+      { name:"Bodhi",           price:200000,  model:"bodhi" },
+      { name:"Boor",            price:350000,  model:"boor" },
+      { name:"Brawler",         price:650000,  model:"brawler" },
+      { name:"4x4 Caracara",    price:850000,  model:"caracara" },
+      { name:"Draugur",         price:750000,  model:"draugur" },
+      { name:"Dubsta 6x6",      price:600000,  model:"dubsta3" },
+      { name:"Dune Buggy",      price:300000,  model:"dune" },
+      { name:"Duneloader",      price:325000,  model:"duneloader" },
+      { name:"Everon",          price:700000,  model:"everon2" },
+      { name:"Freecrawler",     price:300000,  model:"freecrawler" },
+      { name:"Hot Rod Blazer",  price:250000,  model:"blazer4" },
+      { name:"Injection",       price:325000,  model:"injection" },
+      { name:"Kalahari",        price:200000,  model:"kalahari" },
+      { name:"Kamacho",         price:650000,  model:"kamacho" },
+      { name:"MonstroCiti",     price:700000,  model:"monstrociti" },
+      { name:"Outlaw",          price:850000,  model:"outlaw" },
+      { name:"Rancher XL",      price:325000,  model:"rancherxl" },
+      { name:"Ratel",           price:1500000, model:"ratel" },
+      { name:"Rebel",           price:350000,  model:"rebel" },
+      { name:"Rebel Rouillé",   price:250000,  model:"rebel2" },
+      { name:"Riata",           price:375000,  model:"riata" },
+      { name:"Sandking SWB",    price:375000,  model:"sandking" },
+      { name:"Sandking XL",     price:400000,  model:"sandking2" },
+      { name:"Terminus",        price:2000000, model:"terminus" },
+      { name:"Vagrant",         price:675000,  model:"vagrant" },
+      { name:"Verus",           price:200000,  model:"verus" },
+      { name:"Walton L35",      price:400000,  model:"waltonl35" },
+      { name:"Yosemite Rancher",price:400000,  model:"yosemite3" },
+    ]
+  }  ,
+  suv: {
+    label: "SUV",
+    cars: [
+      { name:"Aleutian",          price:1800000, model:"aleutian" },
+      { name:"Astron",            price:1600000, model:"astron" },
+      { name:"Baller",            price:700000,  model:"baller" },
+      { name:"Baller (Sport)",    price:700000,  model:"baller2" },
+      { name:"Baller LE",         price:750000,  model:"baller3" },
+      { name:"Baller LE LWB",     price:800000,  model:"baller4" },
+      { name:"Baller ST",         price:1700000, model:"baller5" },
+      { name:"BeeJay XL",         price:600000,  model:"bjxl" },
+      { name:"Cavalcade",         price:700000,  model:"cavalcade" },
+      { name:"Cavalcade (Sport)", price:750000,  model:"cavalcade2" },
+      { name:"Cavalcade XL",      price:1600000, model:"cavalcade3" },
+      { name:"Contender",         price:1500000, model:"contender" },
+      { name:"Dorado",            price:700000,  model:"dorado" },
+      { name:"Dubsta",            price:1200000, model:"dubsta" },
+      { name:"Dubsta (Custom)",   price:1300000, model:"dubsta2" },
+      { name:"FQ 2",              price:500000,  model:"fq2" },
+      { name:"Granger",           price:1000000, model:"granger" },
+      { name:"Gresley",           price:650000,  model:"gresley" },
+      { name:"Habanero",          price:450000,  model:"habanero" },
+      { name:"Huntley S",         price:800000,  model:"huntley" },
+      { name:"I-Wagen",           price:1300000, model:"iwagen" },
+      { name:"Issi Rallye",       price:1300000, model:"issi5" },
+      { name:"Landstalker",       price:700000,  model:"landstalker" },
+      { name:"Landstalker XL",    price:750000,  model:"landstalker2" },
+      { name:"Mesa",              price:500000,  model:"mesa" },
+      { name:"Novak",             price:1200000, model:"novak" },
+      { name:"Patriot",           price:900000,  model:"patriot" },
+      { name:"Patriot Stretch",   price:5000000, model:"patriot2" },
+      { name:"Radius",            price:500000,  model:"radius" },
+      { name:"Rebla GTS",         price:1400000, model:"rebla" },
+      { name:"Rocoto",            price:750000,  model:"rocoto" },
+      { name:"Seminole",          price:600000,  model:"seminole" },
+      { name:"Seminole Frontier", price:800000,  model:"seminole2" },
+      { name:"Serrano",           price:750000,  model:"serrano" },
+      { name:"Toros",             price:1700000, model:"toros" },
+      { name:"Vivanite",          price:900000,  model:"vivanite" },
+      { name:"XLS",               price:1200000, model:"xls" },
+    ]
+  }
+};
+
+let currentCat = 'sport';
+let currentFilter = 'all';
+
+function formatPrice(p) {
+  if (p >= 1000000) { const m=p/1000000; return (Number.isInteger(m)?m:m.toFixed(1))+'M $'; }
+  return (p/1000).toFixed(0)+'.0K $';
+}
+
+function setCategory(cat, btn) {
+  currentCat = cat;
+  currentFilter = 'all';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('categoryLabel').textContent = 'Catégorie — ' + DATA[cat].label;
+  updateFilters(cat);
+  filterCars();
+}
+
+function updateFilters(cat) {
+  const max = Math.max(...DATA[cat].cars.map(c => c.price));
+  const fl = document.getElementById('f-low');
+  const fm = document.getElementById('f-mid');
+  const fh = document.getElementById('f-high');
+  if (cat === 'muscle') {
+    fl.textContent = '— 500K$'; fm.textContent = '500K — 700K$'; fh.textContent = '+ 700K$';
+  } else if (cat === 'compacts') {
+    fl.textContent = '— 100K$'; fm.textContent = '100K — 150K$'; fh.textContent = '+ 150K$';
+  } else if (cat === 'sedans') {
+    fl.textContent = '— 250K$'; fm.textContent = '250K — 500K$'; fh.textContent = '+ 500K$';
+  } else if (cat === 'classique') {
+    fl.textContent = '— 700K$'; fm.textContent = '700K — 1.2M$'; fh.textContent = '+ 1.2M$';
+  } else if (cat === 'vans') {
+    fl.textContent = '— 600K$'; fm.textContent = '600K — 900K$'; fh.textContent = '+ 900K$';
+  } else if (cat === 'coupes') {
+    fl.textContent = '— 400K$'; fm.textContent = '400K — 800K$'; fh.textContent = '+ 800K$';
+  } else if (cat === 'super') {
+    fl.textContent = '— 3M$'; fm.textContent = '3M — 6M$'; fh.textContent = '+ 6M$';
+  } else if (cat === 'offroad') {
+    fl.textContent = '— 350K$'; fm.textContent = '350K — 700K$'; fh.textContent = '+ 700K$';
+  } else if (cat === 'suv') {
+    fl.textContent = '— 750K$'; fm.textContent = '750K — 1.5M$'; fh.textContent = '+ 1.5M$';
+  } else {
+    fl.textContent = '— 1M$'; fm.textContent = '1M — 2M$'; fh.textContent = '+ 2M$';
+  }
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCars();
+}
+
+function filterCars() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sort = document.getElementById('sortSelect').value;
+
+  let filtered = DATA[currentCat].cars.filter(c => {
+    const mQ = c.name.toLowerCase().includes(q);
+    let mF = true;
+    if (currentCat === 'muscle') {
+      if (currentFilter === 'low')  mF = c.price < 500000;
+      if (currentFilter === 'mid')  mF = c.price >= 500000 && c.price <= 700000;
+      if (currentFilter === 'high') mF = c.price > 700000;
+    } else if (currentCat === 'compacts') {
+      if (currentFilter === 'low')  mF = c.price < 100000;
+      if (currentFilter === 'mid')  mF = c.price >= 100000 && c.price <= 150000;
+      if (currentFilter === 'high') mF = c.price > 150000;
+    } else if (currentCat === 'sedans') {
+      if (currentFilter === 'low')  mF = c.price < 250000;
+      if (currentFilter === 'mid')  mF = c.price >= 250000 && c.price <= 500000;
+      if (currentFilter === 'high') mF = c.price > 500000;
+    } else if (currentCat === 'classique') {
+      if (currentFilter === 'low')  mF = c.price < 700000;
+      if (currentFilter === 'mid')  mF = c.price >= 700000 && c.price <= 1200000;
+      if (currentFilter === 'high') mF = c.price > 1200000;
+    } else if (currentCat === 'vans') {
+      if (currentFilter === 'low')  mF = c.price < 600000;
+      if (currentFilter === 'mid')  mF = c.price >= 600000 && c.price <= 900000;
+      if (currentFilter === 'high') mF = c.price > 900000;
+    } else if (currentCat === 'coupes') {
+      if (currentFilter === 'low')  mF = c.price < 400000;
+      if (currentFilter === 'mid')  mF = c.price >= 400000 && c.price <= 800000;
+      if (currentFilter === 'high') mF = c.price > 800000;
+    } else if (currentCat === 'super') {
+      if (currentFilter === 'low')  mF = c.price < 3000000;
+      if (currentFilter === 'mid')  mF = c.price >= 3000000 && c.price <= 6000000;
+      if (currentFilter === 'high') mF = c.price > 6000000;
+    } else if (currentCat === 'offroad') {
+      if (currentFilter === 'low')  mF = c.price < 350000;
+      if (currentFilter === 'mid')  mF = c.price >= 350000 && c.price <= 700000;
+      if (currentFilter === 'high') mF = c.price > 700000;
+    } else if (currentCat === 'suv') {
+      if (currentFilter === 'low')  mF = c.price < 750000;
+      if (currentFilter === 'mid')  mF = c.price >= 750000 && c.price <= 1500000;
+      if (currentFilter === 'high') mF = c.price > 1500000;
+    } else {
+      if (currentFilter === 'low')  mF = c.price < 1000000;
+      if (currentFilter === 'mid')  mF = c.price >= 1000000 && c.price <= 2000000;
+      if (currentFilter === 'high') mF = c.price > 2000000;
+    }
+    return mQ && mF;
+  });
+
+  filtered.sort((a,b) => {
+    if (sort==='name') return a.name.localeCompare(b.name);
+    if (sort==='name-desc') return b.name.localeCompare(a.name);
+    if (sort==='price-asc') return a.price-b.price;
+    if (sort==='price-desc') return b.price-a.price;
+    return 0;
+  });
+
+  renderGrid(filtered);
+}
+
+const ph = `<div class="img-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1l2-3h12l2 3h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Photo indisponible</span></div>`;
+
+function renderGrid(cars) {
+  const grid = document.getElementById('carGrid');
+  document.getElementById('countDisplay').textContent = cars.length;
+  if (!cars.length) {
+    grid.innerHTML = `<div class="empty-state"><p>Aucun véhicule trouvé</p><span>Modifiez vos critères de recherche</span></div>`;
+    return;
+  }
+  const cat = DATA[currentCat].label;
+  grid.innerHTML = cars.map((car, i) => {
+    const url = imgUrl(car.model);
+    const sUrl = url.replace(/'/g,'%27');
+    const sName = car.name.replace(/'/g,"\\'");
+    const sCat = cat.replace(/'/g,"\\'");
+    return `<div class="card" style="animation-delay:${Math.min(i,20)*0.03}s" onclick="openModal('${sName}',${car.price},'${sUrl}','${sCat}')">
+      <div class="card-img" id="cw${i}">
+        <img src="${url}" alt="${car.name}" loading="lazy" onerror="document.getElementById('cw${i}').innerHTML='${ph.replace(/'/g,"\\'")}'" >
+      </div>
+      <div class="card-body">
+        <div class="card-header">
+          <div class="car-name">${car.name}</div>
+          <div class="price-tag">${formatPrice(car.price)}</div>
+        </div>
+        <div class="card-footer">
+          <span class="cat-badge">${cat}</span>
+          <button class="buy-btn">Voir détails</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openModal(name, price, imgSrc, cat) {
+  document.getElementById('modalTitle').textContent = name;
+  document.getElementById('modalPrice').textContent = formatPrice(price);
+  document.getElementById('modalCat').textContent = cat;
+  const img = document.getElementById('modalImg');
+  img.src = imgSrc; img.style.display='block';
+  img.onerror = () => { img.style.display='none'; };
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModalBg(e) {
+  if (e.target===document.getElementById('modal')) document.getElementById('modal').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modal').classList.remove('open'); });
+
+filterCars();
+
+function toggleDropdown() {
+  const menu = document.getElementById('catDropdownMenu');
+  const arrow = document.getElementById('catArrow');
+  menu.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+function selectCat(cat, label, el) {
+  document.getElementById('catDropdownLabel').textContent = 'Catégorie';
+  document.getElementById('catDropdownMenu').classList.remove('open');
+  document.getElementById('catArrow').classList.remove('open');
+  document.querySelectorAll('.cat-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  // Reuse existing setCategory logic
+  currentCat = cat;
+  currentFilter = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('categoryLabel').textContent = 'Catégorie — ' + DATA[cat].label;
+  updateFilters(cat);
+  filterCars();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const wrap = document.querySelector('.cat-dropdown-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('catDropdownMenu').classList.remove('open');
+    document.getElementById('catArrow').classList.remove('open');
+  }
+});
+
+</script>
+</body>
+</html>
